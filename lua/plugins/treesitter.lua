@@ -4,7 +4,7 @@ return {
   build = ":TSUpdate",
   config = function()
     local ts = require("nvim-treesitter")
-    ts.install({ "lua", "c", "cpp", "python" })
+    ts.install({ "lua", "c", "cpp", "python", "regex", "bash" })
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { "lua", "c", "cpp", "python" },

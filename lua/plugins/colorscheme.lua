@@ -5,16 +5,7 @@ return {
     priority = 1000,
     opts = {
       flavour = "mocha",
-      integrations = {
-        barbar = true,
-        blink_cmp = true,
-        gitsigns = true,
-        mason = true,
-        noice = true,
-        notify = true,
-        nvimtree = true,
-        rainbow_delimiters = true,
-      },
+      default_integrations = true,
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
@@ -31,19 +22,21 @@ return {
     },
   },
   {
-    'romgrk/barbar.nvim',
+    "romgrk/barbar.nvim",
     dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+      "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+      "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
     },
-    init = function() vim.g.barbar_auto_setup = false end,
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
     opts = {
       -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
       -- animation = true,
       -- insert_at_start = true,
       -- …etc.
     },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+    version = "^1.0.0", -- optional: only update when a new 1.x version is released
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
@@ -52,7 +45,15 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      -- add any options here
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+        },
+      },
+      presets = {
+        long_message_to_split = true,
+      },
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -61,7 +62,7 @@ return {
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
-      }
+    },
   },
   {
     "folke/which-key.nvim",
@@ -77,6 +78,6 @@ return {
         end,
         desc = "Buffer Local Keymaps (which-key)",
       },
+    },
   },
-}
 }
