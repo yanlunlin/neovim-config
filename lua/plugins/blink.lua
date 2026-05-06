@@ -150,7 +150,7 @@ return {
           },
         },
         documentation = {
-          auto_show = true,
+          auto_show = false,
           window = {
             border = "rounded",
           },
@@ -165,6 +165,9 @@ return {
         },
       },
       cmdline = {
+        keymap = {
+          preset = "super-tab",
+        },
         completion = {
           list = { selection = { auto_insert = false } },
           menu = {
