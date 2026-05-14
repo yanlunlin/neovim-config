@@ -4,11 +4,11 @@ return {
   build = ":TSUpdate",
   config = function()
     local ts = require("nvim-treesitter")
-    ts.install({ "lua", "c", "cpp", "python", "regex", "bash" })
+    ts.install({ "lua", "c", "cpp", "python", "regex", "bash", "markdown", "html", "latex", "yaml" })
 
-    vim.api.nvim_create_autocmd('FileType', {
+    vim.api.nvim_create_autocmd("FileType", {
       pattern = { "lua", "c", "cpp", "python" },
-      callback = function() 
+      callback = function()
         vim.treesitter.start()
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
