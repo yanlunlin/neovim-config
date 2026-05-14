@@ -21,6 +21,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+build = function()
+  require("blink.cmp").build():wait(60000)
+end
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
