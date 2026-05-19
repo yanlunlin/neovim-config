@@ -101,6 +101,15 @@ return {
     version = "*",
   },
   {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  {
     "saghen/blink.cmp",
     dependencies = {
       "saghen/blink.lib",
@@ -122,6 +131,7 @@ return {
             columns = {
               { "kind_icon", gap = 1 },
               { "label", gap = 1 },
+              { "source_name" },
             },
 
             components = {
@@ -173,6 +183,41 @@ return {
           menu = {
             auto_show = true,
           },
+        },
+      },
+      sources = {
+        default = { "lazydev", "lsp", "path", "buffer", "snippets" },
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
+          },
+          lsp = {
+            score_offset = 50,
+          },
+          snippets = {
+            score_offset = -50,
+          },
+        },
+      },
+      fuzzy = {
+        implementation = "rust",
+        sorts = {
+          function(a, b)
+            if a.label == b.label then
+              local d1 = (a.labelDetails and a.labelDetails.detail) or ""
+              local d2 = (b.labelDetails and b.labelDetails.detail) or ""
+              if #d1 ~= #d2 then
+                return #d1 < #d2
+              end
+            end
+          end,
+          "exact",
+          "sort_text",
+          "score",
+          "label",
+          "kind",
         },
       },
     },
